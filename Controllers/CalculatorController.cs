@@ -9,32 +9,26 @@ public class CalculatorController(ICalculatorService calculatorService) : Contro
     [HttpGet]
     public IActionResult Index()
     {
-        return View(new CalculatorViewModel());
+        return View();
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Index(CalculatorViewModel model)
+    public IActionResult Calculate([FromBody] CalculationRequest request)
     {
-        if (!ModelState.IsValid)
-            return View(model);
-
         try
         {
-            model.Result = calculatorService.Calculate(
-                model.FirstNumber,
-                model.SecondNumber,
-                model.Operation);
-        }
-        catch (DivideByZeroException exception)
-        {
-            ModelState.AddModelError(nameof(model.SecondNumber), exception.Message);
-        }
-        catch (ArgumentException exception)
-        {
-            ModelState.AddModelError(nameof(model.Operation), exception.Message);
-        }
+            var result = calculatorService.Calculate(
+                request.FirstNumber,
+                request.SecondNumber,
+                request.Operation);
 
-        return View(model);
+            return Ok(new { result });
+        }
+        catch (Exception exception) when (
+            exception is ArgumentException ||
+            exception is DivideByZeroException)
+        {
+            return BadRequest(new { error = exception.Message });
+        }
     }
 }
