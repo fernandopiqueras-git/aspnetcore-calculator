@@ -1,9 +1,9 @@
 @{
-    ViewData["Title"] = "Scientific Calculator";
+    ViewData["Title"] = "Calculadora científica";
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,8 +13,7 @@
 <body>
     <main class="calculator">
         <header class="calculator-header">
-            <span>Scientific</span>
-            <button type="button" class="history-button" aria-label="Calculation history">⌛</button>
+            <span>Calculadora científica</span>
         </header>
 
         <section class="screen" aria-live="polite">
@@ -23,15 +22,17 @@
             <div id="error" class="error"></div>
         </section>
 
-        <section class="keypad">
+        <section class="keypad" aria-label="Teclado de calculadora">
             <button type="button" class="function" data-action="clear">C</button>
             <button type="button" class="function" data-action="backspace">⌫</button>
             <button type="button" class="function" data-unary="percent">%</button>
+            <button type="button" class="function" data-unary="reciprocal">1/x</button>
             <button type="button" class="operator" data-binary="divide">÷</button>
 
             <button type="button" class="function" data-unary="square">x²</button>
             <button type="button" class="function" data-unary="sqrt">²√x</button>
-            <button type="button" class="function" data-unary="reciprocal">1/x</button>
+            <button type="button" class="function" data-binary="power">xʸ</button>
+            <button type="button" class="function" data-unary="factorial">n!</button>
             <button type="button" class="operator" data-binary="multiply">×</button>
 
             <button type="button" class="function" data-unary="sin">sin</button>
@@ -54,13 +55,9 @@
 
             <button type="button" class="function" data-unary="log">log</button>
             <button type="button" class="function" data-unary="ln">ln</button>
-            <button type="button" class="function" data-action="pi">π</button>
             <button type="button" data-action="sign">+/−</button>
             <button type="button" data-digit="0">0</button>
             <button type="button" data-action="decimal">,</button>
-
-            <button type="button" class="function wide" data-unary="factorial">n!</button>
-            <button type="button" class="function wide" data-binary="power">xʸ</button>
         </section>
     </main>
 
