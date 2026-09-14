@@ -1,6 +1,9 @@
+using AspNetCoreCalculator.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICalculatorService, CalculatorService>();
 
 var app = builder.Build();
 
