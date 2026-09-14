@@ -4,7 +4,7 @@ public class CalculatorService : ICalculatorService
 {
     public double Calculate(double firstNumber, double? secondNumber, string operation)
     {
-        return operation switch
+        var result = operation switch
         {
             "add" => firstNumber + RequireSecondNumber(secondNumber),
             "subtract" => firstNumber - RequireSecondNumber(secondNumber),
@@ -21,19 +21,24 @@ public class CalculatorService : ICalculatorService
             "tan" => Tangent(firstNumber),
             "log" => Logarithm(firstNumber, false),
             "ln" => Logarithm(firstNumber, true),
-            _ => throw new ArgumentException("Select a valid operation.", nameof(operation))
+            _ => throw new ArgumentException("La operación no es válida.", nameof(operation))
         };
+
+        if (double.IsNaN(result) || double.IsInfinity(result))
+            throw new ArithmeticException("El resultado está fuera del rango permitido.");
+
+        return result;
     }
 
     private static double RequireSecondNumber(double? secondNumber)
     {
-        return secondNumber ?? throw new ArgumentException("This operation requires two numbers.");
+        return secondNumber ?? throw new ArgumentException("La operación necesita dos números.");
     }
 
     private static double Divide(double firstNumber, double secondNumber)
     {
         if (secondNumber == 0)
-            throw new DivideByZeroException("Division by zero is not allowed.");
+            throw new DivideByZeroException("No se puede dividir entre cero.");
 
         return firstNumber / secondNumber;
     }
@@ -41,7 +46,7 @@ public class CalculatorService : ICalculatorService
     private static double SquareRoot(double value)
     {
         if (value < 0)
-            throw new ArgumentOutOfRangeException(nameof(value), "A negative number has no real square root.");
+            throw new ArgumentOutOfRangeException(nameof(value), "No existe raíz cuadrada real de un número negativo.");
 
         return Math.Sqrt(value);
     }
@@ -49,7 +54,7 @@ public class CalculatorService : ICalculatorService
     private static double Reciprocal(double value)
     {
         if (value == 0)
-            throw new DivideByZeroException("Zero has no reciprocal.");
+            throw new DivideByZeroException("El cero no tiene inverso.");
 
         return 1 / value;
     }
@@ -57,7 +62,7 @@ public class CalculatorService : ICalculatorService
     private static double Factorial(double value)
     {
         if (value < 0 || value % 1 != 0 || value > 170)
-            throw new ArgumentOutOfRangeException(nameof(value), "Factorial requires an integer from 0 to 170.");
+            throw new ArgumentOutOfRangeException(nameof(value), "El factorial necesita un entero entre 0 y 170.");
 
         var result = 1d;
 
@@ -72,7 +77,7 @@ public class CalculatorService : ICalculatorService
         var normalizedDegrees = Math.Abs(degrees % 180);
 
         if (Math.Abs(normalizedDegrees - 90) < 0.0000000001)
-            throw new ArgumentOutOfRangeException(nameof(degrees), "Tangent is undefined for this angle.");
+            throw new ArgumentOutOfRangeException(nameof(degrees), "La tangente no está definida para este ángulo.");
 
         return Math.Tan(ToRadians(degrees));
     }
@@ -80,7 +85,7 @@ public class CalculatorService : ICalculatorService
     private static double Logarithm(double value, bool natural)
     {
         if (value <= 0)
-            throw new ArgumentOutOfRangeException(nameof(value), "Logarithms require a number greater than zero.");
+            throw new ArgumentOutOfRangeException(nameof(value), "El logaritmo necesita un número mayor que cero.");
 
         return natural ? Math.Log(value) : Math.Log10(value);
     }

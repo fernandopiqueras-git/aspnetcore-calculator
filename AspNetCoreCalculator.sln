@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreCalculator", "AspNetCoreCalculator.csproj", "{37BC899C-E81B-4DDF-9B83-8F9F26FDC71A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreCalculator.Tests", "AspNetCoreCalculator.Tests\AspNetCoreCalculator.Tests.csproj", "{DCC6D917-929D-49D4-A070-D4E529330990}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +16,9 @@ Global
 		{37BC899C-E81B-4DDF-9B83-8F9F26FDC71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37BC899C-E81B-4DDF-9B83-8F9F26FDC71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37BC899C-E81B-4DDF-9B83-8F9F26FDC71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC6D917-929D-49D4-A070-D4E529330990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC6D917-929D-49D4-A070-D4E529330990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC6D917-929D-49D4-A070-D4E529330990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC6D917-929D-49D4-A070-D4E529330990}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

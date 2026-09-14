@@ -11,54 +11,74 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <main class="calculator">
-        <header class="calculator-header">
-            <span>Calculadora científica</span>
-        </header>
+    <main class="workspace">
+        <section class="calculator">
+            <header class="calculator-header">
+                <span>Calculadora científica</span>
+                <button type="button" class="header-button" data-action="toggle-history" aria-label="Mostrar historial">Historial</button>
+            </header>
 
-        <section class="screen" aria-live="polite">
-            <div id="expression" class="expression"></div>
-            <div id="display" class="display">0</div>
-            <div id="error" class="error"></div>
+            <section class="screen" aria-live="polite">
+                <div id="expression" class="expression"></div>
+                <div id="display" class="display">0</div>
+                <div id="error" class="error" role="alert"></div>
+            </section>
+
+            <section class="memory-bar" aria-label="Memoria">
+                <button type="button" data-memory="clear">MC</button>
+                <button type="button" data-memory="recall">MR</button>
+                <button type="button" data-memory="add">M+</button>
+                <button type="button" data-memory="subtract">M−</button>
+                <span id="memory-status" aria-live="polite"></span>
+            </section>
+
+            <section class="keypad" aria-label="Teclado de calculadora">
+                <button type="button" class="function" data-action="clear">C</button>
+                <button type="button" class="function" data-action="backspace">⌫</button>
+                <button type="button" class="function" data-unary="percent">%</button>
+                <button type="button" class="function" data-unary="reciprocal">1/x</button>
+                <button type="button" class="operator" data-binary="divide">÷</button>
+
+                <button type="button" class="function" data-unary="square">x²</button>
+                <button type="button" class="function" data-unary="sqrt">²√x</button>
+                <button type="button" class="function" data-binary="power">xʸ</button>
+                <button type="button" class="function" data-unary="factorial">n!</button>
+                <button type="button" class="operator" data-binary="multiply">×</button>
+
+                <button type="button" class="function" data-unary="sin">sin</button>
+                <button type="button" data-digit="7">7</button>
+                <button type="button" data-digit="8">8</button>
+                <button type="button" data-digit="9">9</button>
+                <button type="button" class="operator" data-binary="subtract">−</button>
+
+                <button type="button" class="function" data-unary="cos">cos</button>
+                <button type="button" data-digit="4">4</button>
+                <button type="button" data-digit="5">5</button>
+                <button type="button" data-digit="6">6</button>
+                <button type="button" class="operator" data-binary="add">+</button>
+
+                <button type="button" class="function" data-unary="tan">tan</button>
+                <button type="button" data-digit="1">1</button>
+                <button type="button" data-digit="2">2</button>
+                <button type="button" data-digit="3">3</button>
+                <button type="button" class="equals" data-action="equals">=</button>
+
+                <button type="button" class="function" data-unary="log">log</button>
+                <button type="button" class="function" data-unary="ln">ln</button>
+                <button type="button" data-action="sign">+/−</button>
+                <button type="button" data-digit="0">0</button>
+                <button type="button" data-action="decimal">,</button>
+            </section>
         </section>
 
-        <section class="keypad" aria-label="Teclado de calculadora">
-            <button type="button" class="function" data-action="clear">C</button>
-            <button type="button" class="function" data-action="backspace">⌫</button>
-            <button type="button" class="function" data-unary="percent">%</button>
-            <button type="button" class="function" data-unary="reciprocal">1/x</button>
-            <button type="button" class="operator" data-binary="divide">÷</button>
-
-            <button type="button" class="function" data-unary="square">x²</button>
-            <button type="button" class="function" data-unary="sqrt">²√x</button>
-            <button type="button" class="function" data-binary="power">xʸ</button>
-            <button type="button" class="function" data-unary="factorial">n!</button>
-            <button type="button" class="operator" data-binary="multiply">×</button>
-
-            <button type="button" class="function" data-unary="sin">sin</button>
-            <button type="button" data-digit="7">7</button>
-            <button type="button" data-digit="8">8</button>
-            <button type="button" data-digit="9">9</button>
-            <button type="button" class="operator" data-binary="subtract">−</button>
-
-            <button type="button" class="function" data-unary="cos">cos</button>
-            <button type="button" data-digit="4">4</button>
-            <button type="button" data-digit="5">5</button>
-            <button type="button" data-digit="6">6</button>
-            <button type="button" class="operator" data-binary="add">+</button>
-
-            <button type="button" class="function" data-unary="tan">tan</button>
-            <button type="button" data-digit="1">1</button>
-            <button type="button" data-digit="2">2</button>
-            <button type="button" data-digit="3">3</button>
-            <button type="button" class="equals" data-action="equals">=</button>
-
-            <button type="button" class="function" data-unary="log">log</button>
-            <button type="button" class="function" data-unary="ln">ln</button>
-            <button type="button" data-action="sign">+/−</button>
-            <button type="button" data-digit="0">0</button>
-            <button type="button" data-action="decimal">,</button>
-        </section>
+        <aside id="history-panel" class="history-panel" aria-label="Historial de operaciones">
+            <div class="history-header">
+                <h2>Historial</h2>
+                <button type="button" class="header-button" data-action="clear-history">Borrar</button>
+            </div>
+            <ol id="history-list"></ol>
+            <p id="empty-history" class="empty-history">Todavía no hay operaciones.</p>
+        </aside>
     </main>
 
     <script src="~/js/calculator.js"></script>
