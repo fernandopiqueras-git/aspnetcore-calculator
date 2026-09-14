@@ -1,9 +1,10 @@
 using AspNetCoreCalculator.Models;
+using AspNetCoreCalculator.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreCalculator.Controllers;
 
-public class CalculatorController : Controller
+public class CalculatorController(ICalculatorService calculatorService) : Controller
 {
     [HttpGet]
     public IActionResult Index()
@@ -18,21 +19,21 @@ public class CalculatorController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        model.Result = model.Operation switch
+        try
         {
-            "add" => model.FirstNumber + model.SecondNumber,
-            "subtract" => model.FirstNumber - model.SecondNumber,
-            "multiply" => model.FirstNumber * model.SecondNumber,
-            "divide" when model.SecondNumber != 0 => model.FirstNumber / model.SecondNumber,
-            "divide" => null,
-            _ => null
-        };
-
-        if (model.Operation == "divide" && model.SecondNumber == 0)
-            ModelState.AddModelError(nameof(model.SecondNumber), "Division by zero is not allowed.");
-
-        if (model.Result is null && model.Operation != "divide")
-            ModelState.AddModelError(nameof(model.Operation), "Select a valid operation.");
+            model.Result = calculatorService.Calculate(
+                model.FirstNumber,
+                model.SecondNumber,
+                model.Operation);
+        }
+        catch (DivideByZeroException exception)
+        {
+            ModelState.AddModelError(nameof(model.SecondNumber), exception.Message);
+        }
+        catch (ArgumentException exception)
+        {
+            ModelState.AddModelError(nameof(model.Operation), exception.Message);
+        }
 
         return View(model);
     }
