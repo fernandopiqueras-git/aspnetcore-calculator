@@ -12,7 +12,7 @@ A beginner-friendly web calculator built with ASP.NET Core MVC and C#.
 
 ## Requirements
 
-- .NET 10 SDK
+- .NET 8 SDK
 
 ## Run locally
 
