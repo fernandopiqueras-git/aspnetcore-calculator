@@ -1,6 +1,5 @@
-@model CalculatorViewModel
 @{
-    ViewData["Title"] = "Calculator";
+    ViewData["Title"] = "Scientific Calculator";
 }
 
 <!DOCTYPE html>
@@ -13,37 +12,58 @@
 </head>
 <body>
     <main class="calculator">
-        <h1>ASP.NET Core Calculator</h1>
-        <p>Enter two numbers and select an operation.</p>
+        <header class="calculator-header">
+            <span>Scientific</span>
+            <button type="button" class="history-button" aria-label="Calculation history">⌛</button>
+        </header>
 
-        <form asp-action="Index" method="post">
-            <div asp-validation-summary="ModelOnly" class="validation"></div>
+        <section class="screen" aria-live="polite">
+            <div id="expression" class="expression"></div>
+            <div id="display" class="display">0</div>
+            <div id="error" class="error"></div>
+        </section>
 
-            <label asp-for="FirstNumber"></label>
-            <input asp-for="FirstNumber" />
-            <span asp-validation-for="FirstNumber" class="validation"></span>
+        <section class="keypad">
+            <button type="button" class="function" data-action="clear">C</button>
+            <button type="button" class="function" data-action="backspace">⌫</button>
+            <button type="button" class="function" data-unary="percent">%</button>
+            <button type="button" class="operator" data-binary="divide">÷</button>
 
-            <label asp-for="Operation"></label>
-            <select asp-for="Operation">
-                <option value="add">Addition</option>
-                <option value="subtract">Subtraction</option>
-                <option value="multiply">Multiplication</option>
-                <option value="divide">Division</option>
-            </select>
+            <button type="button" class="function" data-unary="square">x²</button>
+            <button type="button" class="function" data-unary="sqrt">²√x</button>
+            <button type="button" class="function" data-unary="reciprocal">1/x</button>
+            <button type="button" class="operator" data-binary="multiply">×</button>
 
-            <label asp-for="SecondNumber"></label>
-            <input asp-for="SecondNumber" />
-            <span asp-validation-for="SecondNumber" class="validation"></span>
+            <button type="button" class="function" data-unary="sin">sin</button>
+            <button type="button" data-digit="7">7</button>
+            <button type="button" data-digit="8">8</button>
+            <button type="button" data-digit="9">9</button>
+            <button type="button" class="operator" data-binary="subtract">−</button>
 
-            <button type="submit">Calculate</button>
-        </form>
+            <button type="button" class="function" data-unary="cos">cos</button>
+            <button type="button" data-digit="4">4</button>
+            <button type="button" data-digit="5">5</button>
+            <button type="button" data-digit="6">6</button>
+            <button type="button" class="operator" data-binary="add">+</button>
 
-        @if (Model.Result.HasValue)
-        {
-            <section class="result">
-                Result: <strong>@Model.Result</strong>
-            </section>
-        }
+            <button type="button" class="function" data-unary="tan">tan</button>
+            <button type="button" data-digit="1">1</button>
+            <button type="button" data-digit="2">2</button>
+            <button type="button" data-digit="3">3</button>
+            <button type="button" class="equals" data-action="equals">=</button>
+
+            <button type="button" class="function" data-unary="log">log</button>
+            <button type="button" class="function" data-unary="ln">ln</button>
+            <button type="button" class="function" data-action="pi">π</button>
+            <button type="button" data-action="sign">+/−</button>
+            <button type="button" data-digit="0">0</button>
+            <button type="button" data-action="decimal">,</button>
+
+            <button type="button" class="function wide" data-unary="factorial">n!</button>
+            <button type="button" class="function wide" data-binary="power">xʸ</button>
+        </section>
     </main>
+
+    <script src="~/js/calculator.js"></script>
 </body>
 </html>
