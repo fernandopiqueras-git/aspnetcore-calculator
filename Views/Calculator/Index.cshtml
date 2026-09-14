@@ -1,0 +1,49 @@
+@model CalculatorViewModel
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <main class="calculator">
+        <h1>ASP.NET Core Calculator</h1>
+        <p>Enter two numbers and select an operation.</p>
+
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+            <label asp-for="FirstNumber"></label>
+            <input asp-for="FirstNumber" />
+            <span asp-validation-for="FirstNumber" class="validation"></span>
+
+            <label asp-for="Operation"></label>
+            <select asp-for="Operation">
+                <option value="add">Addition</option>
+                <option value="subtract">Subtraction</option>
+                <option value="multiply">Multiplication</option>
+                <option value="divide">Division</option>
+            </select>
+
+            <label asp-for="SecondNumber"></label>
+            <input asp-for="SecondNumber" />
+            <span asp-validation-for="SecondNumber" class="validation"></span>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        @if (Model.Result.HasValue)
+        {
+            <section class="result">
+                Result: <strong>@Model.Result</strong>
+            </section>
+        }
+    </main>
+</body>
+</html>
