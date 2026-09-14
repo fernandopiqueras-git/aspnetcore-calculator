@@ -2,5 +2,5 @@ namespace AspNetCoreCalculator.Services;
 
 public interface ICalculatorService
 {
-    decimal Calculate(decimal firstNumber, decimal secondNumber, string operation);
+    double Calculate(double firstNumber, double? secondNumber, string operation);
 }
